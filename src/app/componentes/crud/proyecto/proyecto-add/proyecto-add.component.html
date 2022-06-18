@@ -1,0 +1,30 @@
+<form [formGroup]="proyectoForm" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>Agregar proyecto</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="nombre" matInput placeholder="Argentina programa">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Nombre del proyecto</mat-hint>
+            <div *ngIf="nombre?.errors && nombre?.touched">
+                <mat-error *ngIf="nombre?.hasError('required')">El nombre es requerido.</mat-error>
+                <mat-error *ngIf="nombre?.hasError('minlength')">El nombre debe ser válido.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <textarea formControlName="descripcion" matInput
+                placeholder="Es un proyecto de programación en el cual..."></textarea>
+            <mat-hint>Observaciones</mat-hint>
+            <div *ngIf="descripcion?.errors && descripcion?.touched">
+                <mat-error *ngIf="descripcion?.hasError('required')">La descripción es requerida.</mat-error>
+                <mat-error *ngIf="descripcion?.hasError('minlength')">La descripción debe tiener 3 o más
+                    caracteres.</mat-error>
+            </div>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="botones">
+        <button mat-stroked-button mat-dialog-close color="warn">Cerrar</button>
+        <button [disabled]="!proyectoForm.valid" mat-stroked-button color="primary">Guardar</button>
+    </div>
+</form>

@@ -1,0 +1,48 @@
+<form [formGroup]="estudioForm" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>Agregar estudio</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Institución</mat-label>
+            <input formControlName="institucion" matInput placeholder="Escuela N° 21. Provincias Unidas">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Nombre de la institución</mat-hint>
+            <div *ngIf="institucion?.errors && institucion?.touched">
+                <mat-error *ngIf="institucion?.hasError('required')">El nombre es requerido.</mat-error>
+                <mat-error *ngIf="institucion?.hasError('minlength')">El nombre debe ser válido.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Título</mat-label>
+            <input formControlName="titulo" matInput placeholder="Primario completo">
+            <mat-icon matSuffix>school</mat-icon>
+            <mat-hint>El título que se obtiene por finalizar el estudio.</mat-hint>
+            <div *ngIf="titulo?.errors && titulo?.touched">
+                <mat-error *ngIf="titulo?.hasError('required')">El título es requerido.</mat-error>
+                <mat-error *ngIf="titulo?.hasError('minlength')">El título debe tiener 3 o más
+                    caracteres.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Lugar</mat-label>
+            <input formControlName="lugar" matInput placeholder="Tierra del Fuego">
+            <mat-icon matSuffix>public</mat-icon>
+            <mat-hint>¿Dónde se encuentra la institución?</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado">
+                <mat-option *ngFor="let estado of estadosProgresoEstudio | keyvalue" [value]="estado.value">
+                    {{ estado.key }}
+                </mat-option>
+            </mat-select>
+            <mat-hint>El progreso del estudio.</mat-hint>
+            <div *ngIf="estado?.errors && estado?.touched">
+                <mat-error *ngIf="titulo?.hasError('required')">El estado es requerido.</mat-error>
+            </div>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="botones">
+        <button mat-stroked-button mat-dialog-close color="warn">Cerrar</button>
+        <button [disabled]="!estudioForm.valid" mat-stroked-button color="primary">Guardar</button>
+    </div>
+</form>

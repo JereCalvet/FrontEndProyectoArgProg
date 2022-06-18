@@ -9,14 +9,14 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion/autenticac
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
+  loginForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private authSvc: AutenticacionService,
     private router: Router
   ) {
-    this.form = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
@@ -25,16 +25,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   get Email() {
-    return this.form.get('email');
+    return this.loginForm.get('email');
   }
 
   get Password() {
-    return this.form.get('password');
+    return this.loginForm.get('password');
   }
 
-  onEnviar(event: Event) {
-    event.preventDefault();
-    this.authSvc.IniciarSesion(this.form.value).subscribe((response) => {
+  onSubmit() {
+    this.authSvc.IniciarSesion(this.loginForm.value).subscribe((response) => {
       console.log('response', JSON.stringify(response));
       this.router.navigate(['/portfolio']);
     });

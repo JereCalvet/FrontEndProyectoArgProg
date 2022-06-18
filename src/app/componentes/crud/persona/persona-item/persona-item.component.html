@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button>
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Portfolio</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="warn">Login</button>
+</mat-toolbar>
+
+<div *ngIf="persona" class="persona">
+    <img src="{{ persona.imagen }}" alt="{{ persona.nombres }}" width="50" height="50">
+    <p>ID: {{ persona.id }}</p>
+    <h3>{{ persona.nombres }} {{ persona.apellidos }}</h3>
+    <p> {{ persona.ocupacion }}</p>
+    <p> {{ calcularEdad() }} años</p>
+    <p>{{ persona.fechaNacimiento }}</p>
+    <p>{{ persona.descripcion }}</p>
+</div>
+
+<app-trabajos *ngIf="persona" [listadoTrabajos]="persona.experienciasLaborales" [personaId]="persona.id"></app-trabajos>
+<app-estudios *ngIf="persona" [listadoEstudios]="persona.estudios" [personaId]="persona.id"></app-estudios>
+<!-- habilidades -->
+<app-proyectos *ngIf="persona" [listadoProyectos]="persona.proyectos" [personaId]="persona.id"></app-proyectos>
