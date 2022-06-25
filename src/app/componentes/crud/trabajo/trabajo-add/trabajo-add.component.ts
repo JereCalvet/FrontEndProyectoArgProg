@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Trabajo } from 'src/app/modelo/Trabajo';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-trabajo-add',
@@ -11,6 +10,9 @@ import { formatDate } from '@angular/common';
 })
 export class TrabajoAddComponent implements OnInit {
   trabajoForm: FormGroup;
+  minDate: Date = new Date(2000, 1, 1);
+  maxDate: Date = new Date(2030, 1, 1);
+  formTitulo: string;
   @Output() onAddTrabajo = new EventEmitter<Trabajo>();
   @Output() onUpdateTrabajo = new EventEmitter<Trabajo>();
 
@@ -25,12 +27,14 @@ export class TrabajoAddComponent implements OnInit {
       desde: ['', [Validators.required]],
       hasta: ['', [Validators.required]],
     });
-    console.log(this.trabajoForm);
   }
 
   ngOnInit(): void {
     if (this.trabajoEnEdicion) {
       this.trabajoForm.patchValue(this.trabajoEnEdicion);
+      this.formTitulo = 'Editar trabajo';
+    } else {
+      this.formTitulo = 'Agregar trabajo';
     }
   }
 

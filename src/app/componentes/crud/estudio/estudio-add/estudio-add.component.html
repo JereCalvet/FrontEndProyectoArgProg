@@ -1,5 +1,5 @@
 <form [formGroup]="estudioForm" (ngSubmit)="onSubmit()">
-    <h1 mat-dialog-title>Agregar estudio</h1>
+    <h1 mat-dialog-title>{{ formTitulo }}</h1>
     <div mat-dialog-content>
         <mat-form-field appearance="outline">
             <mat-label>Institución</mat-label>

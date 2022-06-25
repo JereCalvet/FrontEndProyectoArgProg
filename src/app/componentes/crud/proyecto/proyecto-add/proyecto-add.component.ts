@@ -10,6 +10,7 @@ import { Proyecto } from 'src/app/modelo/Proyecto';
 })
 export class ProyectoAddComponent implements OnInit {
   proyectoForm: FormGroup;
+  formTitulo: string;
   @Output() onAddProyecto = new EventEmitter<Proyecto>();
   @Output() onUpdateProyecto = new EventEmitter<Proyecto>();
 
@@ -26,6 +27,9 @@ export class ProyectoAddComponent implements OnInit {
   ngOnInit(): void {
     if (this.proyectoEnEdicion) {
       this.proyectoForm.patchValue(this.proyectoEnEdicion);
+      this.formTitulo = 'Editar proyecto';
+    } else {
+      this.formTitulo = 'Agregar proyecto';
     }
   }
 

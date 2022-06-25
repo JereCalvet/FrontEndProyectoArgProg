@@ -2,9 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Proyecto } from 'src/app/modelo/Proyecto';
-import { Persona } from 'src/app/modelo/Persona';
+import { Persona } from 'src/app/modelo/persona';
 import { Estudio } from 'src/app/modelo/Estudio';
 import { Trabajo } from 'src/app/modelo/Trabajo';
+import { Habilidad } from 'src/app/modelo/Habilidad';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,6 +27,21 @@ export class PersonasService {
 
   obtenerPersonaPorId(id: number = 1): Observable<Persona> {
     return this.http.get<Persona>(`${this.apiUrl}/find/${id}`);
+  }
+
+  actualizarPersonaPorId(idPersona: number, persona: Persona): Observable<Persona> {
+    const datosPersona: any = {
+      id: idPersona,
+      nombres: persona.nombres,
+      apellidos: persona.apellidos,
+      fechaNacimiento: persona.fechaNacimiento,
+      nacionalidad: persona.nacionalidad,
+      email: persona.email,
+      descripcion: persona.descripcion,
+      imagen: persona.imagen,
+      ocupacion: persona.ocupacion,
+    };
+    return this.http.put<Persona>(`${this.apiUrl}/update/${idPersona}`, datosPersona, httpOptions);
   }
 
   // -----------------------------proyectos-----------------------------
@@ -83,7 +99,7 @@ export class PersonasService {
   agregarTrabajo(idPersona: number, trabajo: Trabajo): Observable<Trabajo[]> {
     return this.http
       .post<Trabajo>(`${this.apiUrl}/add/${idPersona}/trabajos/`, trabajo, httpOptions)
-      .pipe(map((persona: any) => persona.trabajos));
+      .pipe(map((persona: any) => persona.experienciasLaborales));
   }
 
   actualizarTrabajo(idPersona: number, trabajo: Trabajo): Observable<Trabajo[]> {
@@ -93,12 +109,37 @@ export class PersonasService {
         trabajo,
         httpOptions
       )
-      .pipe(map((persona: any) => persona.trabajos));
+      .pipe(map((persona: any) => persona.experienciasLaborales));
   }
 
   borrarTrabajo(idPersona: number, idProyecto: number): Observable<void> {
     return this.http.delete<void>(
       `${this.apiUrl}/remove/${idPersona}/trabajos/${idProyecto}`,
+      httpOptions
+    );
+  }
+
+  // -----------------------------habilidades-----------------------------
+
+  agregarHabilidad(idPersona: number, habilidad: Habilidad): Observable<Habilidad[]> {
+    return this.http
+      .post<Habilidad>(`${this.apiUrl}/add/${idPersona}/habilidades/`, habilidad, httpOptions)
+      .pipe(map((persona: any) => persona.habilidades));
+  }
+
+  actualizarHabilidad(idPersona: number, habilidad: Habilidad): Observable<Habilidad[]> {
+    return this.http
+      .put<Habilidad>(
+        `${this.apiUrl}/update/${idPersona}/habilidades/${habilidad.id}`,
+        habilidad,
+        httpOptions
+      )
+      .pipe(map((persona: any) => persona.habilidades));
+  }
+
+  borrarHabilidad(idPersona: number, idHabilidad: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/remove/${idPersona}/habilidades/${idHabilidad}`,
       httpOptions
     );
   }

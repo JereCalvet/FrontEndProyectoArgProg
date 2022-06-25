@@ -2,22 +2,44 @@
     <button mat-icon-button>
         <mat-icon>arrow_back</mat-icon>
     </button>
-    <span>Portfolio</span>
+    <span *ngIf="persona">Portfolio de {{ persona.nombres }} {{ persona.apellidos }}</span>
     <span class="spacer"></span>
     <button mat-raised-button color="warn">Login</button>
 </mat-toolbar>
 
-<div *ngIf="persona" class="persona">
-    <img src="{{ persona.imagen }}" alt="{{ persona.nombres }}" width="50" height="50">
-    <p>ID: {{ persona.id }}</p>
-    <h3>{{ persona.nombres }} {{ persona.apellidos }}</h3>
-    <p> {{ persona.ocupacion }}</p>
-    <p> {{ calcularEdad() }} años</p>
-    <p>{{ persona.fechaNacimiento }}</p>
-    <p>{{ persona.descripcion }}</p>
-</div>
+<mat-card *ngIf="persona" class="persona">
+    <mat-card-header>
+        <div mat-card-avatar [ngStyle]="{
+            'background-image': 'url(' + persona.imagen  + ')',
+            'background-size': 'cover'    
+        }">
+        </div>
+        <mat-card-title>{{ persona.nombres }} {{ persona.apellidos }}
+            <button mat-icon-button color="primary" (click)="editarPersona()">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-card-title>
+    </mat-card-header>
+    <!-- <img mat-card-image src="{{ persona.imagen }}" alt="{{ persona.nombres }}" width="50" height="50"> -->
 
-<app-trabajos *ngIf="persona" [listadoTrabajos]="persona.experienciasLaborales" [personaId]="persona.id"></app-trabajos>
+    <mat-card-content>
+        <p>ID: {{ persona.id }}</p>
+        <p> {{ persona.ocupacion }}</p>
+        <p> {{ calcularEdad() }} años</p>
+        <p>{{ persona.nacionalidad }}</p>
+        <p>{{ persona.fechaNacimiento }}</p>
+        <a href="mailto:{{ persona.email }}">Información de contacto</a>
+    </mat-card-content>
+    <mat-card-footer>
+        <h2>Acerca de</h2>
+        <p>{{ persona.descripcion }}</p>
+    </mat-card-footer>
+</mat-card>
+
+<app-trabajos *ngIf=" persona" [listadoTrabajos]="persona.experienciasLaborales" [personaId]="persona.id">
+</app-trabajos>
 <app-estudios *ngIf="persona" [listadoEstudios]="persona.estudios" [personaId]="persona.id"></app-estudios>
-<!-- habilidades -->
-<app-proyectos *ngIf="persona" [listadoProyectos]="persona.proyectos" [personaId]="persona.id"></app-proyectos>
+<app-habilidades *ngIf="persona" [listadoHabilidades]="persona.habilidades" [personaId]="persona.id">
+</app-habilidades>
+<app-proyectos *ngIf="persona" [listadoProyectos]="persona.proyectos" [personaId]="persona.id">
+</app-proyectos>

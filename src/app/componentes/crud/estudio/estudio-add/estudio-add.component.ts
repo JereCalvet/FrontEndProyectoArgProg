@@ -12,6 +12,7 @@ import { ProgresoEstudio } from 'src/app/modelo/progreso-estudio';
 export class EstudioAddComponent implements OnInit {
   estudioForm: FormGroup;
   estadosProgresoEstudio = ProgresoEstudio;
+  formTitulo: string;
   @Output() onAddEstudio = new EventEmitter<Estudio>();
   @Output() onUpdateEstudio = new EventEmitter<Estudio>();
 
@@ -30,6 +31,9 @@ export class EstudioAddComponent implements OnInit {
   ngOnInit(): void {
     if (this.estudioEnEdicion) {
       this.estudioForm.patchValue(this.estudioEnEdicion);
+      this.formTitulo = 'Editar estudio';
+    } else {
+      this.formTitulo = 'Agregar estudio';
     }
   }
 

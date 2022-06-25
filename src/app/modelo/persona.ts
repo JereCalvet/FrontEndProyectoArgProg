@@ -1,5 +1,6 @@
 import { Estudio } from './Estudio';
 import { Habilidad } from './Habilidad';
+import { Nacionalidad } from './nacionalidad';
 import { Proyecto } from './Proyecto';
 import { Trabajo } from './Trabajo';
 
@@ -8,7 +9,7 @@ export interface Persona {
   nombres: string;
   apellidos: string;
   fechaNacimiento: string;
-  nacionalidad: string;
+  nacionalidad: Nacionalidad;
   email: string;
   descripcion: string;
   imagen: string;

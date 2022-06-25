@@ -26,6 +26,7 @@ import { EstudiosComponent } from './componentes/crud/estudio/estudios/estudios.
 import { HabilidadesComponent } from './componentes/crud/habilidad/habilidades/habilidades.component';
 import { HabilidadAddComponent } from './componentes/crud/habilidad/habilidad-add/habilidad-add.component';
 import { HabilidadItemComponent } from './componentes/crud/habilidad/habilidad-item/habilidad-item.component';
+import { PersonaAddComponent } from './componentes/crud/persona/persona-add/persona-add.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { HabilidadItemComponent } from './componentes/crud/habilidad/habilidad-i
     HabilidadesComponent,
     HabilidadAddComponent,
     HabilidadItemComponent,
+    PersonaAddComponent,
   ],
   imports: [
     BrowserModule,
