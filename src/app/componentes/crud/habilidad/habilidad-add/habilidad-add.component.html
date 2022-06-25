@@ -1,0 +1,40 @@
+<form [formGroup]="habilidadForm" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>{{ formTitulo }}</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="nombre" matInput placeholder="Resolución de problemas.">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Habilidad personal</mat-hint>
+            <div *ngIf="nombre?.errors && nombre?.touched">
+                <mat-error *ngIf="nombre?.hasError('required')">El nombre es requerido.</mat-error>
+                <mat-error *ngIf="nombre?.hasError('minlength')">El nombre debe ser válido.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Nivel</mat-label>
+            <input type="number" formControlName="nivel" matInput placeholder="15%">
+            <mat-hint>Porcentaje de la capacidad.</mat-hint>
+            <div *ngIf="nivel?.errors && nivel?.touched">
+                <mat-error *ngIf="nivel?.hasError('required')">El nivel es requerido.</mat-error>
+                <mat-error *ngIf="nivel?.hasError('min')">El nivel minimo es 0.</mat-error>
+                <mat-error *ngIf="nivel?.hasError('max')">El nivel maximo es 100.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <textarea formControlName="descripcion" matInput
+                placeholder="Aplico mis todos mis conocimientos para..."></textarea>
+            <mat-hint>Observaciones</mat-hint>
+            <div *ngIf="descripcion?.errors && descripcion?.touched">
+                <mat-error *ngIf="descripcion?.hasError('required')">La descripción es requerida.</mat-error>
+                <mat-error *ngIf="descripcion?.hasError('minlength')">La descripción debe tiener 3 o más
+                    caracteres.</mat-error>
+            </div>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="botones">
+        <button mat-stroked-button mat-dialog-close color="warn">Cerrar</button>
+        <button [disabled]="!habilidadForm.valid" mat-stroked-button color="primary">Guardar</button>
+    </div>
+</form>

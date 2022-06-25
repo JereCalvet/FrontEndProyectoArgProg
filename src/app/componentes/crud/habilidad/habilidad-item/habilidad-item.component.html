@@ -1,0 +1,18 @@
+<div>
+    <p>ID: {{ habilidad.id }}</p>
+    <h3>{{ habilidad.nombre }}
+        <button mat-icon-button color="primary" (click)="onEdit(habilidad)">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDelete(habilidad)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </h3>
+    <p>{{ habilidad.descripcion }}</p>
+    <div>
+        <mat-progress-bar mode="determinate" color="primary" value="{{ habilidad.nivel }}"></mat-progress-bar>
+        <div>
+            {{habilidad.nivel}}%
+        </div>
+    </div>
+</div>

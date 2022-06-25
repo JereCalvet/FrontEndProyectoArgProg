@@ -1,0 +1,53 @@
+<form [formGroup]="trabajoForm" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>{{ formTitulo }}</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Empresa</mat-label>
+            <input formControlName="empresa" matInput placeholder="Carrefour">
+            <mat-icon matSuffix>work</mat-icon>
+            <mat-hint>Nombre de la empresa</mat-hint>
+            <div *ngIf="empresa?.errors && empresa?.touched">
+                <mat-error *ngIf="empresa?.hasError('required')">El nombre es requerido.</mat-error>
+                <mat-error *ngIf="empresa?.hasError('minlength')">El nombre debe ser válido.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Cargo</mat-label>
+            <input formControlName="cargo" matInput placeholder="Administrativo">
+            <mat-icon matSuffix>supervised_user_circle</mat-icon>
+            <mat-hint>El puesto que ocupaba en la empresa.</mat-hint>
+            <div *ngIf="cargo?.errors && cargo?.touched">
+                <mat-error *ngIf="cargo?.hasError('required')">El cargo es requerido.</mat-error>
+                <mat-error *ngIf="cargo?.hasError('minlength')">El cargo debe tiener 3 o más caracteres.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Lugar</mat-label>
+            <input formControlName="lugar" matInput placeholder="Tierra del Fuego">
+            <mat-icon matSuffix>public</mat-icon>
+            <mat-hint>¿Dónde se encuentra la empresa?</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Periodo</mat-label>
+            <mat-date-range-input [rangePicker]="periodoTrabajado" [min]="minDate" [max]="maxDate">
+                <input matStartDate formControlName="desde" placeholder="Fecha inicio">
+                <input matEndDate formControlName="hasta" placeholder="Fecha fin">
+            </mat-date-range-input>
+            <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="periodoTrabajado"></mat-datepicker-toggle>
+            <mat-date-range-picker #periodoTrabajado color="accent"></mat-date-range-picker>
+            <div *ngIf="(desde?.errors && desde?.touched) || (hasta?.errors && hasta?.touched)">
+                <mat-error *ngIf="desde?.hasError('required')">La fecha de inicio es requerida.</mat-error>
+                <mat-error *ngIf="desde?.hasError('matDatepickerMin')">La fecha desde debe ser mayor.</mat-error>
+                <mat-error *ngIf="desde?.hasError('matDatepickerMax')">La fecha desde debe ser menor.</mat-error>
+                <mat-error *ngIf="hasta?.hasError('required')">La fecha final es requerida.</mat-error>
+                <mat-error *ngIf="hasta?.hasError('matDatepickerMax')">La fecha hasta debe ser menor.</mat-error>
+                <mat-error *ngIf="hasta?.hasError('matDatepickerMin')">La fecha hasta debe ser mayor.</mat-error>
+            </div>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="botones">
+        <button mat-stroked-button mat-dialog-close color="warn">Cerrar</button>
+        <button [disabled]="!trabajoForm.valid" mat-stroked-button color="primary">Guardar</button>
+    </div>
+</form>
