@@ -7,11 +7,11 @@
 
     <mat-card-content>
         <app-trabajo-item *ngFor="let trabajo of listadoTrabajos" [trabajo]="trabajo"
-            (onDeleteTrabajo)="onDelete(trabajo)" (onEditTrabajo)="onEdit(trabajo)">
+            (onDeleteTrabajo)="onDelete(trabajo)" (onEditTrabajo)="onEdit(trabajo)" [autorizacion]="autorizacion">
         </app-trabajo-item>
     </mat-card-content>
 
-    <mat-card-actions align="end">
+    <mat-card-actions align="end" *ngIf="autorizacion">
         <button mat-raised-button color="accent" (click)="agregarTrabajo()">Agregar trabajo</button>
     </mat-card-actions>
 </mat-card>

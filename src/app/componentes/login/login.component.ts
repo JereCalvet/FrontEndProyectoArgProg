@@ -1,6 +1,9 @@
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { AutenticacionService } from 'src/app/servicios/autenticacion/autenticacion.service';
 
 @Component({
@@ -14,28 +17,42 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authSvc: AutenticacionService,
-    private router: Router
+    private router: Router,
+    private spinnerSvc: NgxSpinnerService,
+    private toasterSvc: ToastrService
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
   ngOnInit(): void {}
 
-  get Email() {
-    return this.loginForm.get('email');
+  get username() {
+    return this.loginForm.get('username');
   }
 
-  get Password() {
+  get password() {
     return this.loginForm.get('password');
   }
 
   onSubmit() {
-    this.authSvc.IniciarSesion(this.loginForm.value).subscribe((response) => {
-      console.log('response', JSON.stringify(response));
-      this.router.navigate(['/portfolio']);
+    this.spinnerSvc.show();
+    this.authSvc.login(this.loginForm.value).subscribe({
+      next: () => {
+        this.spinnerSvc.hide();
+        this.toasterSvc.success('Login correcto.', 'Exito');
+        this.router.navigate(['/personas']);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.spinnerSvc.hide();
+        if (err.status === HttpStatusCode.Forbidden) {
+          this.toasterSvc.error('Usuario o contraseña incorrectos.', 'Error');
+        } else {
+          this.toasterSvc.error(`Error de conexión. Codigo: ${err.status} ${err.message}`, 'Error');
+        }
+      },
     });
   }
 }

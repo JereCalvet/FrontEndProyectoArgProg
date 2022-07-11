@@ -15,6 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class TrabajosComponent implements OnInit {
   @Input() listadoTrabajos: Trabajo[];
   @Input() personaId: number;
+  @Input() autorizacion: boolean;
 
   constructor(
     private personaSvc: PersonasService,

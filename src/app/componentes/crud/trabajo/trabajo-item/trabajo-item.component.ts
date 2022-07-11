@@ -8,6 +8,7 @@ import { Trabajo } from 'src/app/modelo/Trabajo';
 })
 export class TrabajoItemComponent implements OnInit {
   @Input() trabajo: Trabajo;
+  @Input() autorizacion: boolean;
   @Output() onEditTrabajo = new EventEmitter<Trabajo>();
   @Output() onDeleteTrabajo = new EventEmitter<Trabajo>();
 

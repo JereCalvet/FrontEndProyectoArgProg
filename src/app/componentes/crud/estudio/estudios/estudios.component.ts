@@ -15,6 +15,7 @@ import { EstudioAddComponent } from '../estudio-add/estudio-add.component';
 export class EstudiosComponent implements OnInit {
   @Input() listadoEstudios: Estudio[];
   @Input() personaId: number;
+  @Input() autorizacion: boolean;
 
   constructor(
     private personaSvc: PersonasService,

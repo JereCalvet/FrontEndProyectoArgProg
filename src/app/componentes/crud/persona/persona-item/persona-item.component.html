@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button>
+    <button mat-icon-button routerLink="/personas">
         <mat-icon>arrow_back</mat-icon>
     </button>
     <span *ngIf="persona">Portfolio de {{ persona.nombres }} {{ persona.apellidos }}</span>
     <span class="spacer"></span>
-    <button mat-raised-button color="warn">Login</button>
+    <button mat-raised-button color="warn" routerLink="/login">Login</button>
 </mat-toolbar>
 
 <mat-card *ngIf="persona" class="persona">
@@ -15,9 +15,11 @@
         }">
         </div>
         <mat-card-title>{{ persona.nombres }} {{ persona.apellidos }}
-            <button mat-icon-button color="primary" (click)="editarPersona()">
-                <mat-icon>edit</mat-icon>
-            </button>
+            <div *ngIf="checkPermisoEditar()">
+                <button mat-icon-button color="primary" (click)="editarPersona()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div>
         </mat-card-title>
     </mat-card-header>
     <!-- <img mat-card-image src="{{ persona.imagen }}" alt="{{ persona.nombres }}" width="50" height="50"> -->
@@ -36,10 +38,14 @@
     </mat-card-footer>
 </mat-card>
 
-<app-trabajos *ngIf=" persona" [listadoTrabajos]="persona.experienciasLaborales" [personaId]="persona.id">
+<app-trabajos *ngIf="persona" [listadoTrabajos]="persona.experienciasLaborales" [personaId]="persona.id"
+    [autorizacion]="checkPermisoEditar()">
 </app-trabajos>
-<app-estudios *ngIf="persona" [listadoEstudios]="persona.estudios" [personaId]="persona.id"></app-estudios>
-<app-habilidades *ngIf="persona" [listadoHabilidades]="persona.habilidades" [personaId]="persona.id">
+<app-estudios *ngIf="persona" [listadoEstudios]="persona.estudios" [personaId]="persona.id"
+    [autorizacion]="checkPermisoEditar()"></app-estudios>
+<app-habilidades *ngIf="persona" [listadoHabilidades]="persona.habilidades" [personaId]="persona.id"
+    [autorizacion]="checkPermisoEditar()">
 </app-habilidades>
-<app-proyectos *ngIf="persona" [listadoProyectos]="persona.proyectos" [personaId]="persona.id">
+<app-proyectos *ngIf="persona" [listadoProyectos]="persona.proyectos" [personaId]="persona.id"
+    [autorizacion]="checkPermisoEditar()">
 </app-proyectos>

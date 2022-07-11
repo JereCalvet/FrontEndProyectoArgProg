@@ -15,6 +15,7 @@ import { HabilidadAddComponent } from '../habilidad-add/habilidad-add.component'
 export class HabilidadesComponent implements OnInit {
   @Input() listadoHabilidades: Habilidad[];
   @Input() personaId: number;
+  @Input() autorizacion: boolean;
 
   constructor(
     private personaSvc: PersonasService,

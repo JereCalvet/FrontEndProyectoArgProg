@@ -15,6 +15,7 @@ import { ProyectoAddComponent } from '../../proyecto/proyecto-add/proyecto-add.c
 export class ProyectosComponent implements OnInit {
   @Input() listadoProyectos: Proyecto[];
   @Input() personaId: number;
+  @Input() autorizacion: boolean;
 
   constructor(
     private personaSvc: PersonasService,

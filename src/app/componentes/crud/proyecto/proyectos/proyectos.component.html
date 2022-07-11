@@ -7,11 +7,11 @@
 
     <mat-card-content>
         <app-proyecto-item *ngFor="let proyecto of listadoProyectos" [proyecto]="proyecto"
-            (onDeleteProyecto)="onDelete(proyecto)" (onEditProyecto)="onEdit(proyecto)">
+            (onDeleteProyecto)="onDelete(proyecto)" (onEditProyecto)="onEdit(proyecto)" [autorizacion]="autorizacion">
         </app-proyecto-item>
     </mat-card-content>
 
-    <mat-card-actions align="end">
+    <mat-card-actions align="end" *ngIf="autorizacion">
         <button mat-raised-button color="accent" (click)="agregarProyecto()">Agregar proyecto</button>
     </mat-card-actions>
 </mat-card>

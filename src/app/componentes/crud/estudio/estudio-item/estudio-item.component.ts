@@ -8,6 +8,7 @@ import { Estudio } from 'src/app/modelo/Estudio';
 })
 export class EstudioItemComponent implements OnInit {
   @Input() estudio: Estudio;
+  @Input() autorizacion: boolean;
   @Output() onEditEstudio = new EventEmitter<Estudio>();
   @Output() onDeleteEstudio = new EventEmitter<Estudio>();
 

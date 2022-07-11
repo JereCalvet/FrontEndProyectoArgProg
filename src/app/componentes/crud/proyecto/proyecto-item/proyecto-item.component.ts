@@ -8,6 +8,7 @@ import { Proyecto } from 'src/app/modelo/Proyecto';
 })
 export class ProyectoItemComponent implements OnInit {
   @Input() proyecto: Proyecto;
+  @Input() autorizacion: boolean;
   @Output() onEditProyecto = new EventEmitter<Proyecto>();
   @Output() onDeleteProyecto = new EventEmitter<Proyecto>();
 

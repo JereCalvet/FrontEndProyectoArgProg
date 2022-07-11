@@ -7,11 +7,12 @@
 
     <mat-card-content>
         <app-estudio-item *ngFor="let estudio of listadoEstudios" [estudio]="estudio"
-            (onDeleteEstudio)="onDelete(estudio)" (onEditEstudio)="onEdit(estudio)">
+            (onDeleteEstudio)="onDelete(estudio)" (onEditEstudio)="onEdit(estudio)" [autorizacion]="autorizacion">
         </app-estudio-item>
     </mat-card-content>
 
-    <mat-card-actions align="end">
-        <button mat-raised-button color="accent" (click)="agregarEstudio()">Agregar estudio</button>
+    <mat-card-actions align="end" *ngIf="autorizacion">
+        <button mat-raised-button color="accent" (click)="agregarEstudio()">Agregar
+            estudio</button>
     </mat-card-actions>
 </mat-card>

@@ -7,11 +7,12 @@
 
     <mat-card-content>
         <app-habilidad-item *ngFor="let habilidad of listadoHabilidades" [habilidad]="habilidad"
-            (onDeleteHabilidad)="onDelete(habilidad)" (onEditHabilidad)="onEdit(habilidad)">
+            (onDeleteHabilidad)="onDelete(habilidad)" (onEditHabilidad)="onEdit(habilidad)"
+            [autorizacion]="autorizacion">
         </app-habilidad-item>
     </mat-card-content>
 
-    <mat-card-actions align="end">
+    <mat-card-actions align="end" *ngIf="autorizacion">
         <button mat-raised-button color="accent" (click)="agregarHabilidad()">Agregar habilidad</button>
     </mat-card-actions>
 </mat-card>

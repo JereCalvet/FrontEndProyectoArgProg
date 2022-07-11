@@ -5,6 +5,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from 'src/app/modelo/persona';
+import { Usuario } from 'src/app/modelo/usuario';
+import { AutenticacionService } from 'src/app/servicios/autenticacion/autenticacion.service';
 import { PersonasService } from 'src/app/servicios/personas/personas.service';
 import { PersonaAddComponent } from '../persona-add/persona-add.component';
 
@@ -15,13 +17,15 @@ import { PersonaAddComponent } from '../persona-add/persona-add.component';
 })
 export class PersonaItemComponent implements OnInit {
   persona: Persona;
+  usuario: Usuario;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private personaSvc: PersonasService,
     private spinnerSvc: NgxSpinnerService,
     private toasterSvc: ToastrService,
-    private personaDialog: MatDialog
+    private personaDialog: MatDialog,
+    private authSvc: AutenticacionService
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +33,15 @@ export class PersonaItemComponent implements OnInit {
       this.personaSvc.obtenerPersonaPorId(+params.get('id')!).subscribe((respuesta) => {
         this.persona = respuesta;
       });
+    });
+
+    this.authSvc.obtenerNombreUsuario().subscribe({
+      next: (u: Usuario) => {
+        this.usuario = u;
+      },
+      error: (err: HttpErrorResponse) => {
+        // no esta logeado, da igual
+      },
     });
   }
 
@@ -49,7 +62,7 @@ export class PersonaItemComponent implements OnInit {
         next: (personaActualizada) => {
           this.persona = personaActualizada;
           this.spinnerSvc.hide();
-          this.toasterSvc.success('Persona actualizada correctamente.', 'Exito');
+          this.toasterSvc.success('Portfolio actualizado correctamente.', 'Exito');
         },
         error: (err: HttpErrorResponse) => {
           this.spinnerSvc.hide();
@@ -60,5 +73,9 @@ export class PersonaItemComponent implements OnInit {
         dialogRef.componentInstance.onUpdatePersona.unsubscribe();
       });
     });
+  }
+
+  checkPermisoEditar(): boolean {
+    return this.persona && this.usuario && this.persona.usuario?.username === this.usuario.username;
   }
 }

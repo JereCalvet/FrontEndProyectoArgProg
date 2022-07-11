@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
@@ -27,6 +27,9 @@ import { HabilidadesComponent } from './componentes/crud/habilidad/habilidades/h
 import { HabilidadAddComponent } from './componentes/crud/habilidad/habilidad-add/habilidad-add.component';
 import { HabilidadItemComponent } from './componentes/crud/habilidad/habilidad-item/habilidad-item.component';
 import { PersonaAddComponent } from './componentes/crud/persona/persona-add/persona-add.component';
+
+//servicios
+import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -57,14 +60,17 @@ import { PersonaAddComponent } from './componentes/crud/persona/persona-add/pers
     MaterialDesignModule,
     NgxSpinnerModule,
     ToastrModule.forRoot({
-      timeOut: 2000,
+      timeOut: 5000,
       closeButton: true,
       progressBar: true,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
   ],
-  providers: [],
+  providers: [
+    //PorfolioService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

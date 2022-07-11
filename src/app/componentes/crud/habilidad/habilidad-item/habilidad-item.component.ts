@@ -8,6 +8,7 @@ import { Habilidad } from 'src/app/modelo/Habilidad';
 })
 export class HabilidadItemComponent implements OnInit {
   @Input() habilidad: Habilidad;
+  @Input() autorizacion: boolean;
   @Output() onEditHabilidad = new EventEmitter<Habilidad>();
   @Output() onDeleteHabilidad = new EventEmitter<Habilidad>();
 
