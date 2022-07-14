@@ -6,6 +6,7 @@ import { Persona } from 'src/app/modelo/persona';
 import { Estudio } from 'src/app/modelo/Estudio';
 import { Trabajo } from 'src/app/modelo/Trabajo';
 import { Habilidad } from 'src/app/modelo/Habilidad';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +18,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class PersonasService {
-  private readonly apiUrl: string = 'http://localhost:8080/api/v1/persona';
+  private readonly apiUrl: string = `${environment.apiUrl}persona`;
 
   constructor(private http: HttpClient) {}
 

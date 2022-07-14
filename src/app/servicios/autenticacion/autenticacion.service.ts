@@ -4,12 +4,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Usuario } from 'src/app/modelo/usuario';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AutenticacionService {
-  private readonly url: string = 'http://localhost:8080/api/v1/auth/login';
+  private readonly url: string = environment.apiUrl;
   currentUserSubject: BehaviorSubject<any>;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -19,11 +20,11 @@ export class AutenticacionService {
   }
 
   obtenerNombreUsuario(): Observable<Usuario> {
-    return this.http.get<Usuario>('http://localhost:8080/api/v1/auth/current');
+    return this.http.get<Usuario>(`${this.url}auth/current`);
   }
 
   login(credenciales: any): Observable<any> {
-    return this.http.post(this.url, credenciales).pipe(
+    return this.http.post(`${this.url}auth/login`, credenciales).pipe(
       map((responseAccessTokensUser) => {
         sessionStorage.setItem('currentUser', JSON.stringify(responseAccessTokensUser));
         this.currentUserSubject.next(responseAccessTokensUser);
