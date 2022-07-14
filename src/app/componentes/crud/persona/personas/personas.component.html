@@ -1,0 +1,27 @@
+<table class="table table-striped">
+    <thead class="table-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Nacionalidad</th>
+            <th scope="col">Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let persona of listadoPersonas" (click)="onView(persona)">
+            <td>{{ persona.id }}</td>
+            <td><img [src]="persona.imagen" alt="{{ persona.nombres }}" width="50" height="50"></td>
+            <td>{{ persona.nombres }} {{ persona.apellidos }}</td>
+            <td>{{ persona.email }}</td>
+            <td>{{ persona.nacionalidad }}</td>
+            <td>
+                <button [routerLink]="['/persona/', persona.id]" type="button"
+                    class="button btn btn-primary">Ver</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- <app-persona-item *ngFor="let persona of listadoPersonas" [persona]="persona"></app-persona-item> -->

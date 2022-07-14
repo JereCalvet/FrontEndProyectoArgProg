@@ -1,0 +1,81 @@
+<form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>{{ formTitulo }}</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input formControlName="nombres" matInput placeholder="Marcelo">
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-hint>Tus nombres</mat-hint>
+            <div *ngIf="nombres?.errors && nombres?.touched">
+                <mat-error *ngIf="nombres?.hasError('required')">El nombre es requerido.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input formControlName="apellidos" matInput placeholder="Gallardo">
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-hint>Tus apellidos</mat-hint>
+            <div *ngIf="apellidos?.errors && apellidos?.touched">
+                <mat-error *ngIf="apellidos?.hasError('required')">El apellido es requerido.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="fecha" formControlName="fechaNacimiento" placeholder="01/01/2000"
+                [min]="minDate" [max]="maxDate">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+            <mat-datepicker #fecha color="primary"></mat-datepicker>
+            <div *ngIf="fechaNacimiento?.errors && fechaNacimiento?.touched">
+                <mat-error *ngIf="fechaNacimiento?.hasError('matDatepickerMin')">La fecha de nacimiento debe ser mayor.
+                </mat-error>
+                <mat-error *ngIf="fechaNacimiento?.hasError('matDatepickerMax')">La fecha de nacimiento debe ser menor.
+                </mat-error>
+                <mat-error *ngIf="fechaNacimiento?.hasError('required')">La fecha de nacimiento es requerida.
+                </mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Nacionalidad</mat-label>
+            <mat-select formControlName="nacionalidad">
+                <mat-option *ngFor="let nacionalidad of listadoNacionalidades | keyvalue" [value]="nacionalidad.value">
+                    {{ nacionalidad.key }}
+                </mat-option>
+            </mat-select>
+            <mat-hint>¿Dónde naciste?</mat-hint>
+            <div *ngIf="nacionalidad?.errors && nacionalidad?.touched">
+                <mat-error *ngIf="nacionalidad?.hasError('required')">La nacionalidad es requerida.</mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" placeholder="muñeco@river.com">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-hint>Correo electronico</mat-hint>
+            <div *ngIf="email?.errors && email?.touched">
+                <mat-error *ngIf="email?.hasError('email')">
+                    El email debe ser válido.
+                </mat-error>
+                <mat-error *ngIf="email?.hasError('required')">
+                    El email es requerido.
+                </mat-error>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Ocupación</mat-label>
+            <input formControlName="ocupacion" matInput placeholder="Director tecnico">
+            <mat-icon matSuffix>work</mat-icon>
+            <mat-hint>¿A que te dedicas?</mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <textarea formControlName="descripcion" matInput
+                placeholder="Aplico mis todos mis conocimientos para..."></textarea>
+            <mat-hint>Observaciones</mat-hint>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="botones">
+        <button mat-stroked-button mat-dialog-close color="warn">Cerrar</button>
+        <button [disabled]="!personaForm.valid" mat-stroked-button color="primary">Guardar</button>
+    </div>
+</form>

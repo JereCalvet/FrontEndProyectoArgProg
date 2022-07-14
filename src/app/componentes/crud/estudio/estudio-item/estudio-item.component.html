@@ -1,0 +1,16 @@
+<div>
+    <p>ID: {{ estudio.id }}</p>
+    <h3>{{ estudio.institucion }}
+        <div *ngIf="autorizacion">
+            <button mat-icon-button color="primary" (click)="onEdit(estudio)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDelete(estudio)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </h3>
+    <p>{{ estudio.titulo }}</p>
+    <p>{{ estudio.estado }}</p>
+    <p>{{ estudio.lugar }}</p>
+</div>

@@ -1,0 +1,17 @@
+<div>
+    <p>ID: {{ trabajo.id }}</p>
+    <h3>{{ trabajo.cargo }}
+        <div *ngIf="autorizacion">
+            <button mat-icon-button color="primary" (click)="onEdit(trabajo)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDelete(trabajo)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </h3>
+    <h4>{{ trabajo.empresa }}</h4>
+    <p>{{ trabajo.desde }}</p>
+    <p>{{ trabajo.hasta }}</p>
+    <p>{{ trabajo.lugar }}</p>
+</div>

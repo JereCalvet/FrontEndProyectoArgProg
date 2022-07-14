@@ -1,0 +1,14 @@
+<div>
+    <p>ID: {{ proyecto.id }}</p>
+    <h3>{{ proyecto.nombre }}
+        <div *ngIf="autorizacion">
+            <button mat-icon-button color="primary" (click)="onEdit(proyecto)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDelete(proyecto)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </h3>
+    <p>{{ proyecto.descripcion }}</p>
+</div>

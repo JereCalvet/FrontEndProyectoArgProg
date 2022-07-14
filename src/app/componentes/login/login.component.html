@@ -1,0 +1,25 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-atom" [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<h1>Iniciar Sesión</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="username">Email</label>
+        <input type="username" formControlName="username" id="username" placeholder="name@example.com">
+        <div *ngIf="username?.errors && username?.touched">
+            <p *ngIf="username?.hasError('required')" class="text-danger">El email es requerido.</p>
+            <p *ngIf="username?.hasError('email')" class="text-danger">El email debe ser válido.</p>
+        </div>
+    </div>
+    <div>
+        <label for="pass">Contraseña</label>
+        <input type="password" formControlName="password" class="form-control" id="pass">
+        <div *ngIf="password?.errors && password?.touched">
+            <p *ngIf="password?.hasError('required')" class="text-danger">La contraseña es requerida.</p>
+            <p *ngIf="password?.hasError('minlength')" class="text-danger">La contraseña debe tiener 8 o más caracteres.
+            </p>
+        </div>
+    </div>
+    <button [disabled]="!loginForm.valid" type="submit">Enviar</button>
+</form>
