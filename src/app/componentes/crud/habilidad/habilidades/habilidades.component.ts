@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Habilidad } from 'src/app/modelo/Habilidad';
 import { PersonasService } from 'src/app/servicios/personas/personas.service';
@@ -19,7 +18,6 @@ export class HabilidadesComponent implements OnInit {
 
   constructor(
     private personaSvc: PersonasService,
-    private spinnerSvc: NgxSpinnerService,
     private toasterSvc: ToastrService,
     private habilidadDialog: MatDialog
   ) {}
@@ -31,16 +29,13 @@ export class HabilidadesComponent implements OnInit {
       data: habilidad,
     });
     dialogRef.componentInstance.onUpdateHabilidad.subscribe((h) => {
-      this.spinnerSvc.show();
       dialogRef.close();
       this.personaSvc.actualizarHabilidad(this.personaId, h).subscribe({
         next: (habilidades) => {
           this.listadoHabilidades = habilidades;
-          this.spinnerSvc.hide();
           this.toasterSvc.success('Habilidad actualizada correctamente.', 'Exito');
         },
         error: (err: HttpErrorResponse) => {
-          this.spinnerSvc.hide();
           this.toasterSvc.error(err.message, 'Error');
         },
       });
@@ -51,15 +46,12 @@ export class HabilidadesComponent implements OnInit {
   }
 
   onDelete(habilidad: Habilidad) {
-    this.spinnerSvc.show();
     this.personaSvc.borrarHabilidad(this.personaId, habilidad.id).subscribe({
       next: () => {
         this.listadoHabilidades = this.listadoHabilidades.filter((h) => h.id !== habilidad.id);
-        this.spinnerSvc.hide();
         this.toasterSvc.success('Habilidad borrada correctamente.', 'Exito');
       },
       error: (err: HttpErrorResponse) => {
-        this.spinnerSvc.hide();
         this.toasterSvc.error(err.message, 'Error');
       },
     });
@@ -68,16 +60,13 @@ export class HabilidadesComponent implements OnInit {
   agregarHabilidad() {
     const dialogRef = this.habilidadDialog.open(HabilidadAddComponent);
     dialogRef.componentInstance.onAddHabilidad.subscribe((habilidad) => {
-      this.spinnerSvc.show();
       dialogRef.close();
       this.personaSvc.agregarHabilidad(this.personaId, habilidad).subscribe({
         next: (habilidads) => {
           this.listadoHabilidades = habilidads;
-          this.spinnerSvc.hide();
           this.toasterSvc.success('Habilidad agregado correctamente.', 'Exito');
         },
         error: (err: HttpErrorResponse) => {
-          this.spinnerSvc.hide();
           this.toasterSvc.error(err.message, 'Error');
         },
       });

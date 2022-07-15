@@ -30,6 +30,7 @@ import { PersonaAddComponent } from './componentes/crud/persona/persona-add/pers
 
 //servicios
 import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor.service';
+import { LoadingInterceptor } from './ui/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor
   providers: [
     //PorfolioService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

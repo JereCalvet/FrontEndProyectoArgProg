@@ -2,7 +2,6 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AutenticacionService } from 'src/app/servicios/autenticacion/autenticacion.service';
 
@@ -18,7 +17,6 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authSvc: AutenticacionService,
     private router: Router,
-    private spinnerSvc: NgxSpinnerService,
     private toasterSvc: ToastrService
   ) {
     this.loginForm = this.formBuilder.group({
@@ -38,15 +36,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.spinnerSvc.show();
     this.authSvc.login(this.loginForm.value).subscribe({
       next: () => {
-        this.spinnerSvc.hide();
         this.toasterSvc.success('Login correcto.', 'Exito');
         this.router.navigate(['/personas']);
       },
       error: (err: HttpErrorResponse) => {
-        this.spinnerSvc.hide();
         if (err.status === HttpStatusCode.Forbidden) {
           this.toasterSvc.error('Usuario o contraseña incorrectos.', 'Error');
         } else {
