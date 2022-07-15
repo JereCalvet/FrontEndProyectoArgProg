@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from 'src/app/modelo/persona';
@@ -25,13 +25,22 @@ export class PersonaItemComponent implements OnInit {
     private spinnerSvc: NgxSpinnerService,
     private toasterSvc: ToastrService,
     private personaDialog: MatDialog,
-    private authSvc: AutenticacionService
+    private authSvc: AutenticacionService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.personaSvc.obtenerPersonaPorId(+params.get('id')!).subscribe((respuesta) => {
-        this.persona = respuesta;
+      this.personaSvc.obtenerPersonaPorId(+params.get('id')!).subscribe({
+        next: (personaEncontrada) => {
+          this.persona = personaEncontrada;
+          this.spinnerSvc.hide();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.spinnerSvc.hide();
+          this.toasterSvc.error('No se encontro la persona.', 'Error');
+          this.router.navigate(['/personas']);
+        },
       });
     });
 
