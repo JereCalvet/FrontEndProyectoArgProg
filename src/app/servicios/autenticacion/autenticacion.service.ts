@@ -35,8 +35,9 @@ export class AutenticacionService {
 
   // https://jasonwatmore.com/post/2020/04/28/angular-9-user-registration-and-login-example-tutorial
   logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+    console.log('logout');
+    sessionStorage.removeItem('currentUser');
+    this.currentUserSubject.next('{}');
     this.router.navigate(['/personas']);
   }
 

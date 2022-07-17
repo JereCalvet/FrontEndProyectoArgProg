@@ -4,7 +4,7 @@
     </button>
     <span *ngIf="persona">Portfolio de {{ persona.nombres }} {{ persona.apellidos }}</span>
     <span class="spacer"></span>
-    <button mat-raised-button color="warn" routerLink="/login">Login</button>
+    <app-boton-login></app-boton-login>
 </mat-toolbar>
 
 <mat-card *ngIf="persona" class="persona">

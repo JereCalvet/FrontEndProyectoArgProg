@@ -31,6 +31,7 @@ import { PersonaAddComponent } from './componentes/crud/persona/persona-add/pers
 //servicios
 import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor.service';
 import { LoadingInterceptor } from './ui/loading.interceptor';
+import { BotonLoginComponent } from './componentes/login/boton-login/boton-login.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { LoadingInterceptor } from './ui/loading.interceptor';
     HabilidadAddComponent,
     HabilidadItemComponent,
     PersonaAddComponent,
+    BotonLoginComponent,
   ],
   imports: [
     BrowserModule,

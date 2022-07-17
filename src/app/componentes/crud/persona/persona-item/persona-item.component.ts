@@ -78,6 +78,11 @@ export class PersonaItemComponent implements OnInit {
   }
 
   checkPermisoEditar(): boolean {
-    return this.persona && this.usuario && this.persona.usuario?.username === this.usuario.username;
+    return (
+      this.persona &&
+      this.usuario &&
+      this.persona.usuario?.username === this.usuario.username &&
+      this.persona.usuario != null
+    );
   }
 }
