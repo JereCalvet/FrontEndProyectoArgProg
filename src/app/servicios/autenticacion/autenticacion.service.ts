@@ -33,17 +33,15 @@ export class AutenticacionService {
     );
   }
 
-  // https://jasonwatmore.com/post/2020/04/28/angular-9-user-registration-and-login-example-tutorial
   logout() {
-    console.log('logout');
     sessionStorage.removeItem('currentUser');
     this.currentUserSubject.next('{}');
     this.router.navigate(['/personas']);
   }
 
-  // register(user: User) {
-  //   return this.http.post(`${environment.apiUrl}/users/register`, user);
-  // }
+  register(userData: any) {
+    return this.http.post(`${environment.apiUrl}auth/register`, userData);
+  }
 
   get currentUserValue(): any {
     return this.currentUserSubject.value;

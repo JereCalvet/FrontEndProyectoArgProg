@@ -27,11 +27,12 @@ import { HabilidadesComponent } from './componentes/crud/habilidad/habilidades/h
 import { HabilidadAddComponent } from './componentes/crud/habilidad/habilidad-add/habilidad-add.component';
 import { HabilidadItemComponent } from './componentes/crud/habilidad/habilidad-item/habilidad-item.component';
 import { PersonaAddComponent } from './componentes/crud/persona/persona-add/persona-add.component';
+import { BotonLoginComponent } from './componentes/login/boton-login/boton-login.component';
+import { RegisterComponent } from './componentes/register/register.component';
 
 //servicios
 import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor.service';
 import { LoadingInterceptor } from './ui/loading.interceptor';
-import { BotonLoginComponent } from './componentes/login/boton-login/boton-login.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { BotonLoginComponent } from './componentes/login/boton-login/boton-login
     HabilidadItemComponent,
     PersonaAddComponent,
     BotonLoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
