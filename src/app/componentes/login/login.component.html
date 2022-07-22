@@ -2,25 +2,38 @@
     <p style="color: white"> Cargando... </p>
 </ngx-spinner>
 
-<h1>Iniciar Sesión</h1>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-        <label for="username">Email</label>
-        <input type="username" formControlName="username" id="username" placeholder="name@example.com">
-        <div *ngIf="username?.errors && username?.touched">
-            <p *ngIf="username?.hasError('required')" class="text-danger">El email es requerido.</p>
-            <p *ngIf="username?.hasError('email')" class="text-danger">El email debe ser válido.</p>
-        </div>
-    </div>
-    <div>
-        <label for="pass">Contraseña</label>
-        <input type="password" formControlName="password" class="form-control" id="pass">
-        <div *ngIf="password?.errors && password?.touched">
-            <p *ngIf="password?.hasError('required')" class="text-danger">La contraseña es requerida.</p>
-            <p *ngIf="password?.hasError('minlength')" class="text-danger">La contraseña debe tiener 8 o más caracteres.
-            </p>
-        </div>
-    </div>
-    <button mat-stroked-button color="warn" routerLink="/register">Registrarse</button>
-    <button [disabled]="!loginForm.valid" type="submit">Enviar</button>
-</form>
+<mat-card>
+    <h1 mat-dialog-title>Iniciar sesión</h1> 
+    <mat-dialog-content mat-dialog-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre de usuario</mat-label>
+                <input type="email" formControlName="username" matInput placeholder="name@example.com">
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-hint>Correo electrónico</mat-hint>
+                <div *ngIf="username?.errors && username?.touched">
+                    <mat-error *ngIf="username?.hasError('required')">El nombre de usuario es requerido.</mat-error>
+                    <mat-error *ngIf="username?.hasError('email')">El correo electrónico no es válido.</mat-error>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" formControlName="password" matInput placeholder="Contraseña">
+                <mat-icon matSuffix>lock</mat-icon>
+                <mat-hint>Tu contraseña</mat-hint>
+                <div *ngIf="password?.errors && password?.touched">
+                    <mat-error *ngIf="password?.hasError('required')">La contraseña es requerida.</mat-error>
+                </div>
+            </mat-form-field>
+
+            <div mat-dialog-actions class="botones">
+                <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" routerLink="/personas">
+                    <mat-icon>home</mat-icon>
+                  </button>
+                <button mat-stroked-button color="accent" routerLink="/register">Registrarse</button>
+                <button [disabled]="!loginForm.valid" mat-stroked-button color="primary">Ingresar</button>
+            </div>
+        </form>
+    </mat-dialog-content>
+</mat-card>
