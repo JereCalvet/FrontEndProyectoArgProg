@@ -62,8 +62,8 @@ export class HabilidadesComponent implements OnInit {
     dialogRef.componentInstance.onAddHabilidad.subscribe((habilidad) => {
       dialogRef.close();
       this.personaSvc.agregarHabilidad(this.personaId, habilidad).subscribe({
-        next: (habilidads) => {
-          this.listadoHabilidades = habilidads;
+        next: (habilidades) => {
+          this.listadoHabilidades = habilidades;
           this.toasterSvc.success('Habilidad agregado correctamente.', 'Exito');
         },
         error: (err: HttpErrorResponse) => {
