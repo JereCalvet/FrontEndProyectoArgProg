@@ -3,7 +3,12 @@
 </ngx-spinner>
 
 <mat-card>
-    <h1 mat-dialog-title>Iniciar sesión</h1> 
+    <mat-card-header>
+        <mat-card-title-group>
+            <mat-card-title>Iniciar sesión</mat-card-title>
+            <mat-card-subtitle>Ingresa los datos de tu cuenta</mat-card-subtitle>
+        </mat-card-title-group>
+    </mat-card-header>    
     <mat-dialog-content mat-dialog-content>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline">

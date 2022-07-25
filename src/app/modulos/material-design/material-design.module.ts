@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FORMATO_FECHA_ARG } from 'src/app/modelo/formatoFechas';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDividerModule} from '@angular/material/divider'; 
 import {
   DateAdapter,
   MatNativeDateModule,
@@ -32,6 +33,7 @@ const ComponentesMaterial: any[] = [
   MatNativeDateModule,
   MatRippleModule,
   MatProgressBarModule,
+  MatDividerModule
 ];
 
 @NgModule({
