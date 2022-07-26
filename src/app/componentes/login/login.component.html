@@ -14,7 +14,7 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline">
                 <mat-label>Nombre de usuario</mat-label>
-                <input type="email" formControlName="username" matInput placeholder="name@example.com">
+                <input type="email" formControlName="username" matInput placeholder="nombre@gmail.com">
                 <mat-icon matSuffix>email</mat-icon>
                 <mat-hint>Correo electrónico</mat-hint>
                 <div *ngIf="username?.errors && username?.touched">
@@ -34,7 +34,7 @@
             </mat-form-field>
 
             <mat-card-actions class="botones">
-                <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" routerLink="/personas">
+                <button mat-icon-button color="primary" routerLink="/personas">
                     <mat-icon>home</mat-icon>
                   </button>
                 <button mat-stroked-button color="accent" routerLink="/register">Registrarse</button>

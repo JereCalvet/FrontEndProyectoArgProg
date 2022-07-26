@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
     <span>Portfolios</span>
     <span class="spacer"></span>
-    <button mat-flat-button color="accent" (click)="onAddPersona()">Agregar portfolio</button>
+    <button mat-mini-fab color="accent" (click)="onAddPersona()" matTooltip="Agregar portfolio">
+        <mat-icon>group_add</mat-icon>
+    </button>
     <app-boton-login></app-boton-login>
 </mat-toolbar>
 
