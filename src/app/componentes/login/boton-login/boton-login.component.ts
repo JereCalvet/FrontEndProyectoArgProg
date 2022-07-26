@@ -27,6 +27,8 @@ export class BotonLoginComponent implements OnInit {
   onClick() {
     if (this.estadoLogeado) {
       this.authSvc.logout();
+      this.texto = 'Login';
+      this.estadoLogeado = false;
     } else {
       this.router.navigate(['/login']);
     }
