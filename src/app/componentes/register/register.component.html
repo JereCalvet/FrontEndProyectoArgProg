@@ -3,11 +3,14 @@
 </ngx-spinner>
 
 <mat-card>
-    <h1 mat-dialog-title>Registrarse</h1> 
+    <mat-card-header>
+        <mat-card-title-group>
+            <mat-card-title>Registrarse</mat-card-title>
+            <mat-card-subtitle>Completa el formulario con tus datos</mat-card-subtitle>
+        </mat-card-title-group>
+    </mat-card-header>    
     
-    <!-- <mat-divider></mat-divider> -->
-    
-    <mat-dialog-content mat-dialog-content>
+    <mat-card-content>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
@@ -30,25 +33,13 @@
                     <mat-error *ngIf="password?.hasError('minlength')">La contraseña debe tiener 8 o más caracteres.</mat-error>
                 </div>
             </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Repetir Contraseña</mat-label>
-                <input type="password" matInput placeholder="Contraseña">
-                <mat-icon matSuffix>lock</mat-icon>
-                <mat-hint>Tu contraseña</mat-hint>
-                <div *ngIf="password?.errors && password?.touched">
-                    <mat-error *ngIf="password?.hasError('required')">La contraseña es requerida.</mat-error>
-                    <mat-error *ngIf="password?.hasError('minlength')">La contraseña debe tiener 8 o más caracteres.</mat-error>
-                    <mat-error *ngIf="password?.hasError('mismatch')">Las contraseñas no coinciden.</mat-error>
-                </div>
-            </mat-form-field>
-
-            <div mat-dialog-actions class="botones">
+            
+            <mat-card-actions class="botones">
                 <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" routerLink="/personas">
                     <mat-icon>home</mat-icon>
-                  </button>
-                <button [disabled]="!registerForm.valid" mat-stroked-button color="primary">Ingresar</button>
-            </div>
+                </button>
+                <button [disabled]="!registerForm.valid" mat-stroked-button color="primary">Registrarse</button>
+            </mat-card-actions>
         </form>
-    </mat-dialog-content>
+    </mat-card-content>
 </mat-card>

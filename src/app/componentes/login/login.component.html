@@ -9,7 +9,8 @@
             <mat-card-subtitle>Ingresa los datos de tu cuenta</mat-card-subtitle>
         </mat-card-title-group>
     </mat-card-header>    
-    <mat-dialog-content mat-dialog-content>
+    
+    <mat-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline">
                 <mat-label>Nombre de usuario</mat-label>
@@ -32,13 +33,13 @@
                 </div>
             </mat-form-field>
 
-            <div mat-dialog-actions class="botones">
+            <mat-card-actions class="botones">
                 <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" routerLink="/personas">
                     <mat-icon>home</mat-icon>
                   </button>
                 <button mat-stroked-button color="accent" routerLink="/register">Registrarse</button>
                 <button [disabled]="!loginForm.valid" mat-stroked-button color="primary">Ingresar</button>
-            </div>
+            </mat-card-actions>
         </form>
-    </mat-dialog-content>
+    </mat-card-content>
 </mat-card>
