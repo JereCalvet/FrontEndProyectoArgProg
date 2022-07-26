@@ -4,12 +4,17 @@
     </button>
     <span *ngIf="persona">Portfolio de {{ persona.nombres }} {{ persona.apellidos }}</span>
     <span class="spacer"></span>
-    <!-- link -->
     <a mat-button href="https://www.facebook.com/" target="_blank">
         <mat-icon>facebook</mat-icon>
     </a>
-    <a mat-button href="https://www.facebook.com/" target="_blank">
-        <mat-icon>linkedin-box</mat-icon>
+    <a mat-button href="https://www.linkedin.com/" target="_blank">
+        <mat-icon class="fa-brands fa-linkedin"></mat-icon>
+    </a>
+    <a mat-button href="https://www.instagram.com/" target="_blank">
+        <mat-icon class="fab fa-instagram"></mat-icon>
+    </a>
+    <a mat-button href="https://www.twitter.com/" target="_blank">
+        <mat-icon class="fa-brands fa-twitter"></mat-icon>
     </a>
     <app-boton-login></app-boton-login>
 </mat-toolbar>
