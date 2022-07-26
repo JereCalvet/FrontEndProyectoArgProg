@@ -1,28 +1,48 @@
-<button type="button" (click)="onAddPersona()">Agregar portfolio</button>
-<table class="table table-striped">
-    <thead class="table-light">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Foto</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
-            <th scope="col">Nacionalidad</th>
-            <th scope="col">Acción</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let persona of listadoPersonas" (click)="onView(persona)">
-            <td>{{ persona.id }}</td>
-            <td><img [src]="persona.imagen" alt="{{ persona.nombres }}" width="50" height="50"></td>
-            <td>{{ persona.nombres }} {{ persona.apellidos }}</td>
-            <td>{{ persona.email }}</td>
-            <td>{{ persona.nacionalidad }}</td>
-            <td>
-                <button [routerLink]="['/persona/', persona.id]" type="button"
-                    class="button btn btn-primary">Ver</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<mat-toolbar color="primary">
+    <span>Portfolios</span>
+    <span class="spacer"></span>
+    <button mat-flat-button color="accent" (click)="onAddPersona()">Agregar portfolio</button>
+    <app-boton-login></app-boton-login>
+</mat-toolbar>
 
-<!-- <app-persona-item *ngFor="let persona of listadoPersonas" [persona]="persona"></app-persona-item> -->
+<table mat-table [dataSource]="listadoPersonas" class="mat-elevation-z8" aria-describedby="listadoPersonas">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> N° </th>
+      <td mat-cell *matCellDef="let persona"> {{ persona.id }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="foto">
+      <th mat-header-cell *matHeaderCellDef> Foto </th>
+      <td mat-cell *matCellDef="let persona">  
+        <img src="assets/img/marcelo-gallardo.png" alt="{{ persona.nombres }}" width="50" height="50">
+        <!-- aca va la url de la imagen {{ persona.imagen }} -->
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombres </th>
+      <td mat-cell *matCellDef="let persona"> {{ persona.nombres }} {{ persona.apellidos }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let persona"> {{ persona.email }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nacionalidad">
+        <th mat-header-cell *matHeaderCellDef> Nacionalidad </th>
+        <td mat-cell *matCellDef="let persona"> {{ persona.nacionalidad | titlecase }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let persona">
+        <button [routerLink]="['/persona/', persona.id]" mat-icon-button color="primary" matTooltip="Ver">
+            <mat-icon>person</mat-icon>
+        </button>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let persona; columns: displayedColumns;"(click)="onView(persona)"></tr>
+</table>
