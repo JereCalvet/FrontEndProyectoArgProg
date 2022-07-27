@@ -1,6 +1,6 @@
-<div>
-    <p>ID: {{ proyecto.id }}</p>
-    <h3>{{ proyecto.nombre }}
+<div class="container">
+    <!-- <p><strong>N°: </strong>{{ proyecto.id }}</p> -->
+    <h3><strong>Nombre: </strong>{{ proyecto.nombre }}
         <div *ngIf="autorizacion">
             <button mat-icon-button color="primary" (click)="onEdit(proyecto)">
                 <mat-icon>edit</mat-icon>
@@ -10,5 +10,6 @@
             </button>
         </div>
     </h3>
-    <p>{{ proyecto.descripcion }}</p>
+    <p><strong>Descripción: </strong>{{ proyecto.descripcion }}</p>
 </div>
+<mat-divider></mat-divider>

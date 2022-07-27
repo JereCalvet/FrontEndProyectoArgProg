@@ -4,7 +4,6 @@ import { Persona } from 'src/app/modelo/persona';
 import { PersonasService } from 'src/app/servicios/personas/personas.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
 import { PersonaAddComponent } from '../persona-add/persona-add.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -15,7 +14,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class PersonasComponent implements OnInit {
   listadoPersonas: Persona[] = [];
-
+  dataSource = this.listadoPersonas;
+  displayedColumns: string[] = ['id', 'foto', 'nombre', 'email', 'nacionalidad', 'acciones']; 
+  
   constructor(
     private personaSvc: PersonasService,
     private router: Router,

@@ -1,6 +1,6 @@
-<div>
-    <p>ID: {{ habilidad.id }}</p>
-    <h3>{{ habilidad.nombre }}
+<div class="container">
+    <!-- <p><strong>N°: </strong>{{ habilidad.id }}</p> -->
+    <h3><strong>Capacidad: </strong>{{ habilidad.nombre }}
         <div *ngIf="autorizacion">
             <button mat-icon-button color="primary" (click)="onEdit(habilidad)">
                 <mat-icon>edit</mat-icon>
@@ -10,11 +10,10 @@
             </button>
         </div>
     </h3>
-    <p>{{ habilidad.descripcion }}</p>
-    <div>
+    <div class="barra">
         <mat-progress-bar mode="determinate" color="primary" value="{{ habilidad.nivel }}"></mat-progress-bar>
-        <div>
-            {{habilidad.nivel}}%
-        </div>
     </div>
+    <p><strong>Nivel de confianza: </strong>{{ habilidad.nivel }}%</p>
+    <p><strong>Descripción: </strong>{{ habilidad.descripcion }}</p>
 </div>
+<mat-divider></mat-divider>

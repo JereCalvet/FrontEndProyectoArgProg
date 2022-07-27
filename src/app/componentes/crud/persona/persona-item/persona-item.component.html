@@ -4,6 +4,18 @@
     </button>
     <span *ngIf="persona">Portfolio de {{ persona.nombres }} {{ persona.apellidos }}</span>
     <span class="spacer"></span>
+    <a mat-button href="https://www.facebook.com/" target="_blank">
+        <mat-icon>facebook</mat-icon>
+    </a>
+    <a mat-button href="https://www.linkedin.com/" target="_blank">
+        <mat-icon class="fa-brands fa-linkedin"></mat-icon>
+    </a>
+    <a mat-button href="https://www.instagram.com/" target="_blank">
+        <mat-icon class="fab fa-instagram"></mat-icon>
+    </a>
+    <a mat-button href="https://www.twitter.com/" target="_blank">
+        <mat-icon class="fa-brands fa-twitter"></mat-icon>
+    </a>
     <app-boton-login></app-boton-login>
 </mat-toolbar>
 
@@ -25,27 +37,89 @@
     <!-- <img mat-card-image src="{{ persona.imagen }}" alt="{{ persona.nombres }}" width="50" height="50"> -->
 
     <mat-card-content>
-        <p>ID: {{ persona.id }}</p>
-        <p> {{ persona.ocupacion }}</p>
-        <p> {{ calcularEdad() }} años</p>
-        <p>{{ persona.nacionalidad }}</p>
-        <p>{{ persona.fechaNacimiento }}</p>
-        <a href="mailto:{{ persona.email }}">Información de contacto</a>
-    </mat-card-content>
-    <mat-card-footer>
+        
+        <p><strong>N°: </strong> {{ persona.id }}</p>
+        <p><strong>Edad: </strong> {{ calcularEdad() }} años</p>
+        <p><strong>Nacionalidad: </strong> {{ persona.nacionalidad }}</p>
+        <p><strong>Fecha Nacimiento: </strong> {{ persona.fechaNacimiento | date:'longDate' }}</p>
+        <p><strong>Ocupación:</strong> {{ persona.ocupacion }}</p>
+        <p><strong>Contacto: </strong>
+            <a href="mailto:{{ persona.email }}">Información de contacto</a>
+        </p>
+        
+        <mat-divider></mat-divider>
+        
         <h2>Acerca de</h2>
-        <p>{{ persona.descripcion }}</p>
-    </mat-card-footer>
-</mat-card>
+        <p><strong>Descripción: </strong> {{ persona.descripcion }}</p>
+        
+        <div class="botones-acordion">
+            <button mat-raised-button color="primary" (click)="accordion.openAll()">Expandir</button>
+            <button mat-raised-button color="warn" (click)="accordion.closeAll()">Colapsar</button>
+        </div>
+        <mat-accordion class="headers-align" multi>
+            <!-- Trabajo -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Historial laboral</mat-panel-title>
+                    <mat-panel-description>
+                        Trabajos
+                        <mat-icon>work</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-trabajos *ngIf="persona" 
+                    [listadoTrabajos]="persona.experienciasLaborales" 
+                    [personaId]="persona.id" 
+                    [autorizacion]="checkPermisoEditar()"> 
+                </app-trabajos>
+            </mat-expansion-panel>
+      
+            <!-- Estudios -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Historial académico</mat-panel-title>
+                    <mat-panel-description>
+                        Estudios
+                        <mat-icon>school</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>            
+                <app-estudios *ngIf="persona"
+                    [listadoEstudios]="persona.estudios" 
+                    [personaId]="persona.id" 
+                    [autorizacion]="checkPermisoEditar()">
+                </app-estudios>
+            </mat-expansion-panel>
 
-<app-trabajos *ngIf="persona" [listadoTrabajos]="persona.experienciasLaborales" [personaId]="persona.id"
-    [autorizacion]="checkPermisoEditar()">
-</app-trabajos>
-<app-estudios *ngIf="persona" [listadoEstudios]="persona.estudios" [personaId]="persona.id"
-    [autorizacion]="checkPermisoEditar()"></app-estudios>
-<app-habilidades *ngIf="persona" [listadoHabilidades]="persona.habilidades" [personaId]="persona.id"
-    [autorizacion]="checkPermisoEditar()">
-</app-habilidades>
-<app-proyectos *ngIf="persona" [listadoProyectos]="persona.proyectos" [personaId]="persona.id"
-    [autorizacion]="checkPermisoEditar()">
-</app-proyectos>
+            <!-- Habilidades -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Aptitudes</mat-panel-title>
+                    <mat-panel-description>
+                        Capacidades de la persona
+                        <mat-icon>assignment_turned_in</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-habilidades *ngIf="persona"
+                    [listadoHabilidades]="persona.habilidades" 
+                    [personaId]="persona.id" 
+                    [autorizacion]="checkPermisoEditar()">
+                </app-habilidades>
+            </mat-expansion-panel>
+
+            <!-- Proyectos -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Logros</mat-panel-title>
+                    <mat-panel-description>
+                        Proyectos
+                        <mat-icon>build</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-proyectos *ngIf="persona"
+                    [listadoProyectos]="persona.proyectos" 
+                    [personaId]="persona.id" 
+                    [autorizacion]="checkPermisoEditar()">
+                </app-proyectos>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-content>
+</mat-card>

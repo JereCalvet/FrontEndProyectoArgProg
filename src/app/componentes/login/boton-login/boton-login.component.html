@@ -1,1 +1,5 @@
-<button mat-raised-button color="warn" (click)="onClick()"> {{ texto }} </button>
+<button mat-mini-fab color="warn" (click)="onClick()" matTooltip="{{ texto }}">
+    <mat-icon>
+        {{ texto | lowercase }}
+    </mat-icon>    
+</button>

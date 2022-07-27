@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { MaterialDesignModule } from './modulos/material-design/material-design.module';
+import localeEsAr from "@angular/common/locales/es-AR";
+import { registerLocaleData } from "@angular/common";
 
 //componentes
 import { LoginComponent } from './componentes/login/login.component';
@@ -34,6 +36,7 @@ import { RegisterComponent } from './componentes/register/register.component';
 import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor.service';
 import { LoadingInterceptor } from './ui/loading.interceptor';
 
+registerLocaleData(localeEsAr, "es_AR");
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +79,7 @@ import { LoadingInterceptor } from './ui/loading.interceptor';
     //PorfolioService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es_AR' },
   ],
   bootstrap: [AppComponent],
 })
