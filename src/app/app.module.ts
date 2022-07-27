@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { MaterialDesignModule } from './modulos/material-design/material-design.module';
+import localeEsAr from "@angular/common/locales/es-AR";
+import { registerLocaleData } from "@angular/common";
 
 //componentes
 import { LoginComponent } from './componentes/login/login.component';
@@ -27,10 +29,14 @@ import { HabilidadesComponent } from './componentes/crud/habilidad/habilidades/h
 import { HabilidadAddComponent } from './componentes/crud/habilidad/habilidad-add/habilidad-add.component';
 import { HabilidadItemComponent } from './componentes/crud/habilidad/habilidad-item/habilidad-item.component';
 import { PersonaAddComponent } from './componentes/crud/persona/persona-add/persona-add.component';
+import { BotonLoginComponent } from './componentes/login/boton-login/boton-login.component';
+import { RegisterComponent } from './componentes/register/register.component';
 
 //servicios
 import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor.service';
+import { LoadingInterceptor } from './ui/loading.interceptor';
 
+registerLocaleData(localeEsAr, "es_AR");
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +56,8 @@ import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor
     HabilidadAddComponent,
     HabilidadItemComponent,
     PersonaAddComponent,
+    BotonLoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +78,8 @@ import { JwtInterceptorService } from './servicios/autenticacion/jwt-interceptor
   providers: [
     //PorfolioService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es_AR' },
   ],
   bootstrap: [AppComponent],
 })

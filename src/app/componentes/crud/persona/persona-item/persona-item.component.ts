@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from 'src/app/modelo/persona';
 import { Usuario } from 'src/app/modelo/usuario';
@@ -18,11 +18,11 @@ import { PersonaAddComponent } from '../persona-add/persona-add.component';
 export class PersonaItemComponent implements OnInit {
   persona: Persona;
   usuario: Usuario;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private personaSvc: PersonasService,
-    private spinnerSvc: NgxSpinnerService,
     private toasterSvc: ToastrService,
     private personaDialog: MatDialog,
     private authSvc: AutenticacionService,
@@ -34,10 +34,8 @@ export class PersonaItemComponent implements OnInit {
       this.personaSvc.obtenerPersonaPorId(+params.get('id')!).subscribe({
         next: (personaEncontrada) => {
           this.persona = personaEncontrada;
-          this.spinnerSvc.hide();
         },
         error: (err: HttpErrorResponse) => {
-          this.spinnerSvc.hide();
           this.toasterSvc.error('No se encontro la persona.', 'Error');
           this.router.navigate(['/personas']);
         },
@@ -65,16 +63,13 @@ export class PersonaItemComponent implements OnInit {
       data: this.persona,
     });
     dialogRef.componentInstance.onUpdatePersona.subscribe((p) => {
-      this.spinnerSvc.show();
       dialogRef.close();
       this.personaSvc.actualizarPersonaPorId(this.persona.id, p).subscribe({
         next: (personaActualizada) => {
           this.persona = personaActualizada;
-          this.spinnerSvc.hide();
           this.toasterSvc.success('Portfolio actualizado correctamente.', 'Exito');
         },
         error: (err: HttpErrorResponse) => {
-          this.spinnerSvc.hide();
           this.toasterSvc.error(err.message, 'Error');
         },
       });
@@ -85,6 +80,11 @@ export class PersonaItemComponent implements OnInit {
   }
 
   checkPermisoEditar(): boolean {
-    return this.persona && this.usuario && this.persona.usuario?.username === this.usuario.username;
+    return (
+      this.persona &&
+      this.usuario &&
+      this.persona.usuario?.username === this.usuario.username &&
+      this.persona.usuario != null
+    );
   }
 }

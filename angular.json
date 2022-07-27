@@ -107,5 +107,8 @@
       }
     }
   },
-  "defaultProject": "FrontendProyectoArgProg"
+  "defaultProject": "FrontendProyectoArgProg",
+  "cli": {
+    "analytics": "96585e14-814e-49f6-a78a-3b090d4ef20a"
+  }
 }

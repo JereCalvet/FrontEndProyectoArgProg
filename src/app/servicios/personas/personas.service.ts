@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, catchError, of } from 'rxjs';
 import { Proyecto } from 'src/app/modelo/Proyecto';
 import { Persona } from 'src/app/modelo/persona';
 import { Estudio } from 'src/app/modelo/Estudio';
@@ -28,6 +28,14 @@ export class PersonasService {
 
   obtenerPersonaPorId(id: number = 1): Observable<Persona> {
     return this.http.get<Persona>(`${this.apiUrl}/find/${id}`);
+  }
+
+  obtenerPersonaLogeada(): Observable<Persona> {
+    return this.http.get<Persona>(`${this.apiUrl}/current`);
+  }
+
+  agregarPersona(persona: Persona): Observable<Persona> {
+    return this.http.post<Persona>(`${this.apiUrl}/add`, persona, httpOptions);
   }
 
   actualizarPersonaPorId(idPersona: number, persona: Persona): Observable<Persona> {

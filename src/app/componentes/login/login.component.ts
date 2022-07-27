@@ -1,9 +1,9 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AutenticacionService } from 'src/app/servicios/autenticacion/autenticacion.service';
 
 @Component({
@@ -11,14 +11,14 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion/autenticac
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
+  loginSubcription: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     private authSvc: AutenticacionService,
     private router: Router,
-    private spinnerSvc: NgxSpinnerService,
     private toasterSvc: ToastrService
   ) {
     this.loginForm = this.formBuilder.group({
@@ -38,15 +38,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.spinnerSvc.show();
-    this.authSvc.login(this.loginForm.value).subscribe({
+    this.loginSubcription = this.authSvc.login(this.loginForm.value).subscribe({
       next: () => {
-        this.spinnerSvc.hide();
         this.toasterSvc.success('Login correcto.', 'Exito');
         this.router.navigate(['/personas']);
       },
       error: (err: HttpErrorResponse) => {
-        this.spinnerSvc.hide();
         if (err.status === HttpStatusCode.Forbidden) {
           this.toasterSvc.error('Usuario o contraseña incorrectos.', 'Error');
         } else {
@@ -54,5 +51,11 @@ export class LoginComponent implements OnInit {
         }
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.loginSubcription) {
+      this.loginSubcription.unsubscribe();
+    }
   }
 }
