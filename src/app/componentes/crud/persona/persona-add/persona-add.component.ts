@@ -30,7 +30,7 @@ export class PersonaAddComponent implements OnInit {
       ocupacion: [''],
       descripcion: [''],
       nacionalidad: [null, [Validators.required]],
-      imagen: [''],
+      imagen: ['assets/img/marcelo-gallardo.png'],
     });
   }
 
