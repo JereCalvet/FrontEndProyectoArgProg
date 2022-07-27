@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from 'src/app/modelo/persona';
@@ -17,6 +18,7 @@ import { PersonaAddComponent } from '../persona-add/persona-add.component';
 export class PersonaItemComponent implements OnInit {
   persona: Persona;
   usuario: Usuario;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(
     private activatedRoute: ActivatedRoute,
