@@ -40,7 +40,7 @@
         
         <p><strong>N°: </strong> {{ persona.id }}</p>
         <p><strong>Edad: </strong> {{ calcularEdad() }} años</p>
-        <p><strong>Nacionalidad: </strong> {{ persona.nacionalidad }}</p>
+        <p><strong>Nacionalidad: </strong> {{ persona.nacionalidad | titlecase }}</p>
         <p><strong>Fecha Nacimiento: </strong> {{ persona.fechaNacimiento | date:'longDate' }}</p>
         <p><strong>Ocupación:</strong> {{ persona.ocupacion }}</p>
         <p><strong>Contacto: </strong>
