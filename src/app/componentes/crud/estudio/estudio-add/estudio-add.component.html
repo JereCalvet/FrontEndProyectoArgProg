@@ -9,6 +9,8 @@
             <div *ngIf="institucion?.errors && institucion?.touched">
                 <mat-error *ngIf="institucion?.hasError('required')">El nombre es requerido.</mat-error>
                 <mat-error *ngIf="institucion?.hasError('minlength')">El nombre debe ser válido.</mat-error>
+                <mat-error *ngIf="institucion?.hasError('maxlength')">El nombre debe tener menos de 40 caracteres.
+                </mat-error>
             </div>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -18,8 +20,9 @@
             <mat-hint>El título que se obtiene por finalizar el estudio.</mat-hint>
             <div *ngIf="titulo?.errors && titulo?.touched">
                 <mat-error *ngIf="titulo?.hasError('required')">El título es requerido.</mat-error>
-                <mat-error *ngIf="titulo?.hasError('minlength')">El título debe tiener 3 o más
-                    caracteres.</mat-error>
+                <mat-error *ngIf="titulo?.hasError('minlength')">El título debe tener 3 o más caracteres.</mat-error>
+                <mat-error *ngIf="titulo?.hasError('maxlength')">El título puede tener hasta 40 caracteres.
+                </mat-error>
             </div>
         </mat-form-field>
         <mat-form-field appearance="outline">

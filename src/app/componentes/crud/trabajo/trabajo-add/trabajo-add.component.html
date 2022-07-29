@@ -9,6 +9,7 @@
             <div *ngIf="empresa?.errors && empresa?.touched">
                 <mat-error *ngIf="empresa?.hasError('required')">El nombre es requerido.</mat-error>
                 <mat-error *ngIf="empresa?.hasError('minlength')">El nombre debe ser válido.</mat-error>
+                <mat-error *ngIf="empresa?.hasError('maxlength')">El nombre puede tener hasta 40 caracteres.</mat-error>
             </div>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -18,7 +19,7 @@
             <mat-hint>El puesto que ocupaba en la empresa.</mat-hint>
             <div *ngIf="cargo?.errors && cargo?.touched">
                 <mat-error *ngIf="cargo?.hasError('required')">El cargo es requerido.</mat-error>
-                <mat-error *ngIf="cargo?.hasError('minlength')">El cargo debe tiener 3 o más caracteres.</mat-error>
+                <mat-error *ngIf="cargo?.hasError('minlength')">El cargo debe tener 3 o más caracteres.</mat-error>
             </div>
         </mat-form-field>
         <mat-form-field appearance="outline">
