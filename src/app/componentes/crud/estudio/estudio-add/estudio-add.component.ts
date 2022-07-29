@@ -21,8 +21,8 @@ export class EstudioAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public estudioEnEdicion: Estudio
   ) {
     this.estudioForm = this.formBuilder.group({
-      institucion: ['', [Validators.required, Validators.minLength(3)]],
-      titulo: ['', [Validators.required, Validators.minLength(3)]],
+      institucion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
       lugar: [''],
       estado: [null, [Validators.required]],
     });

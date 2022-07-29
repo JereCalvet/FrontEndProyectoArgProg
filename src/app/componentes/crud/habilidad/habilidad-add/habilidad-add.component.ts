@@ -19,7 +19,7 @@ export class HabilidadAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public habilidadEnEdicion: Habilidad
   ) {
     this.habilidadForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
       nivel: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
       descripcion: [''],
     });

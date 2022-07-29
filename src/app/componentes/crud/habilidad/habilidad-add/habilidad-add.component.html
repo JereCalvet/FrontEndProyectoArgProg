@@ -9,6 +9,8 @@
             <div *ngIf="nombre?.errors && nombre?.touched">
                 <mat-error *ngIf="nombre?.hasError('required')">El nombre es requerido.</mat-error>
                 <mat-error *ngIf="nombre?.hasError('minlength')">El nombre debe ser válido.</mat-error>
+                <mat-error *ngIf="nombre?.hasError('maxlength')">El nombre puede tener hasta 40 caracteres.
+                </mat-error>
             </div>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -28,7 +30,7 @@
             <mat-hint>Observaciones</mat-hint>
             <div *ngIf="descripcion?.errors && descripcion?.touched">
                 <mat-error *ngIf="descripcion?.hasError('required')">La descripción es requerida.</mat-error>
-                <mat-error *ngIf="descripcion?.hasError('minlength')">La descripción debe tiener 3 o más
+                <mat-error *ngIf="descripcion?.hasError('minlength')">La descripción debe tener 3 o más
                     caracteres.</mat-error>
             </div>
         </mat-form-field>

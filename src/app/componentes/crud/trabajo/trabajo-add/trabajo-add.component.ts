@@ -21,7 +21,7 @@ export class TrabajoAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public trabajoEnEdicion: Trabajo
   ) {
     this.trabajoForm = this.formBuilder.group({
-      empresa: ['', [Validators.required, Validators.minLength(3)]],
+      empresa: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
       cargo: ['', [Validators.required, Validators.minLength(3)]],
       lugar: [''],
       desde: ['', [Validators.required]],

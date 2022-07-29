@@ -8,8 +8,8 @@
             <mat-card-title>Registrarse</mat-card-title>
             <mat-card-subtitle>Completa el formulario con tus datos</mat-card-subtitle>
         </mat-card-title-group>
-    </mat-card-header>    
-    
+    </mat-card-header>
+
     <mat-card-content>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline">
@@ -30,12 +30,13 @@
                 <mat-hint>Tu contraseña</mat-hint>
                 <div *ngIf="password?.errors && password?.touched">
                     <mat-error *ngIf="password?.hasError('required')">La contraseña es requerida.</mat-error>
-                    <mat-error *ngIf="password?.hasError('minlength')">La contraseña debe tiener 8 o más caracteres.</mat-error>
+                    <mat-error *ngIf="password?.hasError('minlength')">La contraseña debe tener 8 o más caracteres.
+                    </mat-error>
                 </div>
             </mat-form-field>
-            
+
             <mat-card-actions class="botones">
-                <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" routerLink="/personas">
+                <button mat-icon-button color="primary" routerLink="/personas">
                     <mat-icon>home</mat-icon>
                 </button>
                 <button [disabled]="!registerForm.valid" mat-stroked-button color="primary">Registrarse</button>

@@ -19,7 +19,7 @@ export class ProyectoAddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public proyectoEnEdicion: Proyecto
   ) {
     this.proyectoForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
       descripcion: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
