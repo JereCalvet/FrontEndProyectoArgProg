@@ -21,4 +21,4 @@ Para ver los logs de producción o si necesitan que revise el estado de la aplic
 
 * Agregar test.
 * Incluir abstracciones e investigar buenas prácticas con rxjs. Tratar mejor los errores esperados dentro del flow planeado por el backend.
-  
+* Mostrar solo las redes sociales de la persona en el portfolio.  
